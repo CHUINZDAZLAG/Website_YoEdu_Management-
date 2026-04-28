@@ -58,10 +58,10 @@ public class ParentController {
 
         if(existingParent.isPresent()){
             parentService.deleteParent(id);
+            return ResponseEntity.ok(ApiResponse.success("Teacher has been delelted successfully"));
         } else{
             return ResponseEntity.notFound().build();
         }
-        return null;
     }
 
     @DeleteMapping("/all")

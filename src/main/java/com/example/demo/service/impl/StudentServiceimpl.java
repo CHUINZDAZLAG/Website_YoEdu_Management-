@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceimpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceimpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
@@ -20,5 +20,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
+
 
 }
