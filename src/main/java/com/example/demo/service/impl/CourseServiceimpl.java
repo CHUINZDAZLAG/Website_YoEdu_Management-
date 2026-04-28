@@ -3,7 +3,6 @@ package com.example.demo.service.impl;
 import com.example.demo.domain.entity.Course;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.service.CourseService;
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +23,19 @@ public class CourseServiceimpl implements CourseService {
         return courseRepository.findById(id);
     }
 
-    public Course save(Course course){
-        return courseRepository.save(course);
+    public Course save(Course Course){
+        return courseRepository.save(Course);
     }
 
     @Override
-    public Course update(Long id, Course course){
+    public Course update(Long id, Course Course){
         Course existingCourse = courseRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Course Not Found"));
-        existingCourse.setName(course.getName());
-        existingCourse.setDescription(course.getDescription());
-        existingCourse.setCourseCode(course.getCourseCode());
-        existingCourse.setTuitionFee(course.getTuitionFee());
-        existingCourse.setTotalSessions(course.getTotalSessions());
+        existingCourse.setName(Course.getName());
+        existingCourse.setDescription(Course.getDescription());
+        existingCourse.setCourseCode(Course.getCourseCode());
+        existingCourse.setTuitionFee(Course.getTuitionFee());
+        existingCourse.setTotalSessions(Course.getTotalSessions());
         return courseRepository.save(existingCourse);
     }
 

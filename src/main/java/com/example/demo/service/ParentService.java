@@ -8,8 +8,8 @@ import java.util.Optional;
 public interface ParentService {
     List<Parent> findAll();
     Optional<Parent> findById(Long id);
-    Parent save(Parent parent);
-    Parent update(Long id, Parent parent);
+    Parent save(Parent Parent);
+    Parent update(Long id, Parent Parent);
     void deleteParent(Long id);
     void deleteAllParent();
 }

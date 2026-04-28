@@ -36,17 +36,17 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Course>> createCourse(@RequestBody Course course){
-        Course newCourse = courseService.save(course);
+    public ResponseEntity<ApiResponse<Course>> createCourse(@RequestBody Course Course){
+        Course newCourse = courseService.save(Course);
         return ResponseEntity.ok((ApiResponse.success(newCourse)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Course>> updateCourse(@PathVariable Long id, @RequestBody Course course ){
+    public ResponseEntity<ApiResponse<Course>> updateCourse(@PathVariable Long id, @RequestBody Course Course){
         Optional <Course> existingCourse = courseService.findById(id);
 
         if(existingCourse.isPresent()){
-            Course updatedCourse = courseService.update(id, course);
+            Course updatedCourse = courseService.update(id, Course);
             return ResponseEntity.ok(ApiResponse.success(updatedCourse));
         } else {
             return ResponseEntity.notFound().build();

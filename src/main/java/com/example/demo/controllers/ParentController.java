@@ -36,10 +36,10 @@ public class ParentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<Parent>> updateParent(@PathVariable Long id, @RequestBody Parent parent){
+    public ResponseEntity<ApiResponse<Parent>> updateParent(@PathVariable Long id, @RequestBody Parent Parent){
         Optional<Parent> existingParent = parentService.findById(id);
         if(existingParent.isPresent()){
-            Parent updatedParent = parentService.update(id, parent);
+            Parent updatedParent = parentService.update(id, Parent);
             return ResponseEntity.ok(ApiResponse.success(updatedParent));
         } else {
             return ResponseEntity.notFound().build();
@@ -47,8 +47,8 @@ public class ParentController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Parent>> createParent(@RequestBody Parent parent){
-        Parent newParent = parentService.save(parent);
+    public ResponseEntity<ApiResponse<Parent>> createParent(@RequestBody Parent Parent){
+        Parent newParent = parentService.save(Parent);
         return ResponseEntity.ok((ApiResponse.success(newParent)));
     }
 

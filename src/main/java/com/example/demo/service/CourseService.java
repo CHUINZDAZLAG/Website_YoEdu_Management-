@@ -10,9 +10,9 @@ public interface CourseService {
 
     Optional<Course> findById(Long id);
 
-    Course save(Course course);
+    Course save(Course Course);
 
-    Course update(Long id, Course course);
+    Course update(Long id, Course Course);
 
     void deleteById(Long id);
 

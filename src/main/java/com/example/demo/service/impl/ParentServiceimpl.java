@@ -22,17 +22,17 @@ public class ParentServiceimpl implements ParentService{
         return parentRepository.findById(id);
     }
 
-    public Parent save(Parent parent){
-        return parentRepository.save(parent);
+    public Parent save(Parent Parent){
+        return parentRepository.save(Parent);
     }
 
-    public Parent update(Long id, Parent parent){
+    public Parent update(Long id, Parent Parent){
         Parent existingParent = parentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Parent can not found"));
-        existingParent.setFull_name(parent.getFull_name());
-        existingParent.setEmail(parent.getEmail());
-        existingParent.setAddress(parent.getAddress());
-        existingParent.setPhone(parent.getPhone());
+        existingParent.setFull_name(Parent.getFull_name());
+        existingParent.setEmail(Parent.getEmail());
+        existingParent.setAddress(Parent.getAddress());
+        existingParent.setPhone(Parent.getPhone());
         return parentRepository.save(existingParent);
     }
 
