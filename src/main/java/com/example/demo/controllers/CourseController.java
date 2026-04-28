@@ -5,9 +5,7 @@ import com.example.demo.domain.entity.Course;
 import com.example.demo.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +16,13 @@ import java.util.Optional;
 public class CourseController {
     private final CourseService courseService;
 
+    @GetMapping
     public ResponseEntity<ApiResponse<List<Course>>> getCourse (){
         return ResponseEntity.ok(ApiResponse.success(courseService.findAll()));
     }
 
-    public ResponseEntity<ApiResponse<Course>> getCourseById (Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Course>> getCourseById (@PathVariable Long id){
         Optional<Course> course = courseService.findById(id);
   //      return course.map(value->
   //              ResponseEntity.ok(ApiResponse.success(value)))
@@ -34,4 +34,44 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Course>> createCourse(@RequestBody Course course){
+        Course newCourse = courseService.save(course);
+        return ResponseEntity.ok((ApiResponse.success(newCourse)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Course>> updateCourse(@PathVariable Long id, @RequestBody Course course ){
+        Optional <Course> existingCourse = courseService.findById(id);
+
+        if(existingCourse.isPresent()){
+            Course updatedCourse = courseService.update(id, course);
+            return ResponseEntity.ok(ApiResponse.success(updatedCourse));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteCourse(@PathVariable Long id){
+        Optional<Course> existingCourse = courseService.findById(id);
+
+        if(existingCourse.isPresent()){
+            courseService.deleteById(id);
+            return ResponseEntity.ok(
+                    ApiResponse.success("This course has been deleted")
+            );
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<ApiResponse<String>> deleteAllCourse(){
+        courseService.deleteAll();
+        return ResponseEntity.ok(ApiResponse.success("All courses have been deleted successfully"));
+    }
+
+
 }
