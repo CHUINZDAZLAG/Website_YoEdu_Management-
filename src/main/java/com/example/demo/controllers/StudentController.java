@@ -33,7 +33,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponse> create(StudentUpsertRequest req){ //Valid đứng tai đây để chặn request không hợp lệ
+    public ResponseEntity<StudentResponse> create(@Valid @RequestBody StudentUpsertRequest req){ //Valid đứng tai đây để chặn request không hợp lệ
         return ResponseEntity.ok(studentService.create(req));
     }
 

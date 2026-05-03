@@ -4,6 +4,7 @@ import com.example.demo.domain.entity.Parent;
 import com.example.demo.domain.enums.Gender;
 import com.example.demo.domain.enums.StudentStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,26 +19,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor //constructor ko có tham số
 @AllArgsConstructor // 1 tham số chưa hết các trường này
 public class StudentUpsertRequest {
+    @Size(min=2, max=50) // hoặc không cần max => chạy được thì controller có @Valid @RequestBody
     private String studentCode;
 
     private String fullName;
 
-    private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth; // passord trung hay fomat datofbirth ko check => tự viết
 
+    @NotNull
     private Gender gender = Gender.OTHER;
 
-    private String gradeLevel;
+    @NotBlank
+    private String gradeLevel; //Cấp độ 1 và 4 khác gì nhau, size ký tự và số là giá trị
 
     private String schoolName;
 
+    @Pattern(regexp = "^(84|0[3|5|7|8|9])+([0-9]{8})") // sđt ở VN
     private String phone;
 
     private String description;
 
+    @NotNull
     private Long parentId; // không truyền parent private Parent parent mà truyền id
                               // sự khác biệt đầu tiên
     private StudentStatus status = StudentStatus.ACTIVE;
 
+    @Min(value = 1)
+    @Max(value = 4)
     private BigDecimal latestScore = BigDecimal.ZERO;
 
     private String note;
