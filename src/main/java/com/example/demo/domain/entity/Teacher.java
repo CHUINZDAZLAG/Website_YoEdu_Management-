@@ -22,5 +22,5 @@ public class Teacher extends AuditableEntity {
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    private TeacherRole teacherRole;
+    private TeacherRole teacherRole = TeacherRole.TEACHER;
 }
