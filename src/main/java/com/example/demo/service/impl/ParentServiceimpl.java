@@ -29,7 +29,7 @@ public class ParentServiceimpl implements ParentService{
     public Parent update(Long id, Parent Parent){
         Parent existingParent = parentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Parent can not found"));
-        existingParent.setFull_name(Parent.getFull_name());
+        existingParent.setFullName(Parent.getFullName());
         existingParent.setEmail(Parent.getEmail());
         existingParent.setAddress(Parent.getAddress());
         existingParent.setPhone(Parent.getPhone());
